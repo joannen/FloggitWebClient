@@ -1,23 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-    Provider
-} from 'react-redux';
+// import { Provider } from 'react-redux';
+import Root from './components/root';
 
 import Whiteboard from './components/whiteboard';
 import store from './store';
 
-const myWhiteBoard = ( <
-    Provider store = {
-        store
-    } >
-    <
-    Whiteboard / >
-    <
-    /Provider>
-);
+// const myWhiteBoard = (
+//   <Provider store={store}>
+//     <Whiteboard showStart />
+//   </Provider>
+// );
 
-// ReactDOM.render(top, document.querySelector('.header'));
+// ReactDOM.s(top, document.querySelector('.header'));
 ReactDOM.render(
-    myWhiteBoard, document.querySelector('#container')
+  <Root store={store} />, document.querySelector('#container')
 );

@@ -6,6 +6,7 @@ import PostIt from './postit';
 import WhiteboardHeader from './whiteboardHeader';
 import EditDialogue from './editDialogue';
 import ConfirmDeletePostIt from './confirmDeleteDialog';
+import StartPage from './StartPage';
 
 const confirmDialogStyles = {
   content: {
@@ -28,41 +29,47 @@ const editDialogStyles = {
 };
 
 const Whiteboard = (props) => {
-  return (
-    < div >
-      <WhiteboardHeader onAddPostIt={props.handleAdd} />
-      <div className="post-its-container">
-        <ul className="list-group">
-          {props.postits.map(item => (<
+  if (props.showStart) {
+    return (<StartPage />);
+  } else {
+    return (
+      < div >
+        <WhiteboardHeader onAddPostIt={props.handleAdd} />
+        <div className="post-its-container">
+          <ul className="list-group">
+            {props.postits.map(item => (<
           PostIt key={item.id}
-            id={item.id}
-            data={item.postIt}
-            confirmIsVisible={props.confirmIsVisible}
-            onDelete={props.handleDeleteClick}
-            onEdit={props.handleEdit}
-          />)) }
-        </ul>
-      < /div >
+              id={item.id}
+              data={item.postIt}
+              confirmIsVisible={props.confirmIsVisible}
+              onDelete={props.handleDeleteClick}
+              onEdit={props.handleEdit}
+            />)) }
+          </ul>
+        < /div >
 
-      <Modal isOpen={props.confirmIsVisible} style={confirmDialogStyles}>
-        <ConfirmDeletePostIt
-          isVisible={props.confirmIsVisible}
-          id={props.beingDeleted}
-          onDelete={props.handleDeletePostIt}
-        />
-      </Modal>
+        <Modal isOpen={props.confirmIsVisible} style={confirmDialogStyles}>
+          <ConfirmDeletePostIt
+            isVisible={props.confirmIsVisible}
+            id={props.beingDeleted}
+            onDelete={props.handleDeletePostIt}
+          />
+        </Modal>
 
-      <Modal isOpen={props.showEdit} style={editDialogStyles}>
-        <EditDialogue
-          isVisible={props.showEdit}
-          data={props.editing}
-          onUpdatePostIt={props.handleUpdatePostIt}
-          onUpdate={props.handleUpdateClick}
-          onExit={props.closeEditDialog}
-        />
-</Modal>
-    </div>
+        <Modal isOpen={props.showEdit} style={editDialogStyles}>
+          <EditDialogue
+            isVisible={props.showEdit}
+            data={props.editing}
+            onUpdatePostIt={props.handleUpdatePostIt}
+            onUpdate={props.handleUpdateClick}
+            onExit={props.closeEditDialog}
+          />
+        </Modal>
+
+
+      </div>
 );
+  }
 };
 
 const mapStateToProps = state => ({
@@ -76,7 +83,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   handleAdd: (postit) => {
     dispatch(add(postit));
-    // dispatch(getAll());
   },
   handleDeleteClick: (id) => {
     dispatch(setBeingDeleted(id));
@@ -113,9 +119,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(showEdit(false));
     dispatch(setBeingDeleted({}));
   },
-        closeEditDialog: () => {
-         dispatch(showEdit(false));
-    }
+  closeEditDialog: () => {
+    dispatch(showEdit(false));
+  }
 
 
 });
