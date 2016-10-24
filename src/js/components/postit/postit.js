@@ -16,7 +16,6 @@ const PostIt = (props) => {
   }
 
   function showConfirmDialogue() {
-    console.log(props.id);
     props.onDelete(props.id);
   }
 

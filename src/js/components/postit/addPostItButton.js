@@ -56,15 +56,20 @@ class AddPostItButton extends React.Component {
           onRequestClose={this.closeModal}
           style={customStyles}
         >
-          <AddPostItForm onAddPostIt={this.props.onAddPostIt} closeModal={this.closeModal} />
+          <AddPostItForm
+            onAddPostIt={this.props.onAddPostIt}
+            closeModal={this.closeModal}
+            currentWhiteboard={this.props.currentWhiteboard}
+          />
         </Modal>
       </div>
     );
   }
 }
 
-AddPostItButton.propTypes = {
-  onAddPostIt: React.PropTypes.func
-};
+// AddPostItButton.propTypes = {
+//   onAddPostIt: React.PropTypes.func,
+//   currentWhiteboard: React.PropTypes.shape
+// };
 
 export default AddPostItButton;

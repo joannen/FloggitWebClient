@@ -1,15 +1,46 @@
 import React from 'react';
+import TitleBar from './titlebar';
+import WhiteBoardButton from './whiteboard/whiteBoardButton';
 
-const AddWhiteBoardButton = () => (
-  <div>
-    <button type="button" className="btn btn-primary">Add WhiteBoard</button>
-  </div>
+const AddWhiteBoardButton = (props) => {
+  function handleAdd() {
+    props.handleAddWhiteboard();
+  }
+  return (<div>
+    <button type="button" className="btn btn-primary" onClick={handleAdd}>Add WhiteBoard</button>
+  </div>);
+};
+AddWhiteBoardButton.propTypes = {
+  handleAddWhiteboard: React.PropTypes.func
+};
+
+const StartPage = (props) => {
+  if (!props.showWhiteBoard) {
+    return (
+      <div>
+        <TitleBar data={'FLOGGIT WHITEBOARDS'} />
+        <AddWhiteBoardButton handleAddWhiteboard={props.handleAddWhiteboard} />
+        <div className="post-its-container">
+          <ul className="list-group">
+            {props.whiteboards.map(item => (
+              <WhiteBoardButton
+                key={item.id}
+                data={item}
+                handleSetWhiteBoard={props.handleSetWhiteBoard}
+              />
+            ))}
+          </ul>
+        </div>
+
+      </div>
 );
+  }
+  return null;
+};
 
-const StartPage = () =>
-  <div>
-    <AddWhiteBoardButton />
-  </div>
-;
+StartPage.propTypes = {
+  showWhiteBoard: React.PropTypes.bool,
+  handleAddWhiteboard: React.PropTypes.func
+};
 
 export default StartPage;

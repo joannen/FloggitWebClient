@@ -3,7 +3,7 @@ import React from 'react';
 const ConfirmDeletePostIt = (props) => {
   function handleOk() {
     console.log(`DELETING ${props.id}`);
-    props.onDelete(props.id);
+    props.onDelete(props.currentWhiteboard.id, props.id);
   }
 
   function handleCancel() {
@@ -28,7 +28,8 @@ const ConfirmDeletePostIt = (props) => {
 ConfirmDeletePostIt.propTypes = () => ({
   isVisible: React.PropTypes.bool,
   id: React.PropTypes.number,
-  onDelete: React.PropTypes.func
+  onDelete: React.PropTypes.func,
+  currentWhiteboard: React.PropTypes.shape
 });
 
 export default ConfirmDeletePostIt;

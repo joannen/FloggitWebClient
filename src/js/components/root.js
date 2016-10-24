@@ -1,16 +1,23 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { Router, Route } from 'react-router';
-
-import WhiteBoard from './whiteboard';
-
-
-const Root = ({ store }) => (
-  <Provider store={store}>
-    <Router>
-      <Route path="/" component={WhiteBoard} />
-    </Router>
-  </Provider>
-);
-
-export default Root;
+// import React from 'react';
+// import { Provider } from 'react-redux';
+// import { Router, Route, browserHistory } from 'react-router';
+//
+// import WhiteboardContainer from './whiteboard-container';
+// import StartPage from './startPage';
+// import Whiteboard from './whiteboard/whiteboard';
+//
+// const Root = ({ store }) => (
+//   <Provider store={store}>
+//     <Router history={browserHistory}>
+//       <Route path="/(:filter)" component={WhiteboardContainer} >
+//         // <Route path="/:id" component={Whiteboard} />
+//       </Route>
+//     </Router>
+//   </Provider>
+// );
+//
+// Root.propTypes = {
+//   store: React.PropTypes.shape.isRequired
+// };
+//
+// export default Root;

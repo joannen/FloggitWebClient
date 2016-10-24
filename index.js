@@ -1,18 +1,21 @@
-var express = require('express');
+const express = require('express');
 
-var app = express();
-var path = require('path');
+const app = express();
+const path = require('path');
 
-var React = require('react');
-var ReactDOM = require('react-dom/server');
-var DOM = React.DOM, body = DOM.body, div = DOM.div, script = DOM.script;
+const React = require('react');
+const ReactDOM = require('react-dom/server');
+let DOM = React.DOM,
+  body = DOM.body,
+  div = DOM.div,
+  script = DOM.script;
 
-var App = React.createFactory(require('./src/js/components/addPostItButton'));
+const App = React.createFactory(require('./src/js/components/addPostItButton'));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/nodetest', express.static(path.join(__dirname, 'public/n')));
 
-app.get('/nudd', function (req, res) {
+app.get('/nudd', (req, res) => {
     // var html = ReactDOM.renderToStaticMarkup(App);
 
     // var html = ReactDOM.renderToStaticMarkup(
@@ -20,20 +23,25 @@ app.get('/nudd', function (req, res) {
     //         div(div(), div(), div())
     //     )
     // );
-    var html = ReactDOM.renderToStaticMarkup(body(null,
+  const html = ReactDOM.renderToStaticMarkup(body(null,
 
-        div({id: 'content', dangerouslySetInnerHTML: {__html:
+        div({ id: 'content', dangerouslySetInnerHTML: { __html:
             ReactDOM.renderToString(App({}))
-        }}),
+        } }),
 
-    script({src: '//cdnjs.cloudflare.com/ajax/libs/react/15.3.0/react.min.js'}),
-        script({src: '//cdnjs.cloudflare.com/ajax/libs/react/15.3.0/react-dom.min.js'})
+    script({ src: '//cdnjs.cloudflare.com/ajax/libs/react/15.3.0/react.min.js' }),
+        script({ src: '//cdnjs.cloudflare.com/ajax/libs/react/15.3.0/react-dom.min.js' })
 
     ));
 
-    res.send(html);
+
+  res.send(html);
+});
+
+app.get('/*', (req, res) => {
+  res.sendfile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(8081);
 
-console.log("listening on port 8081");
+console.log('listening on port 8081');
