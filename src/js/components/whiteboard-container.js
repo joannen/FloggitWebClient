@@ -1,5 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
+import { Router, Route, browserHistory } from 'react-router';
+
 import { connect } from 'react-redux';
 import { add, remove, setBeingDeleted, showDelete, showEdit,
         setBeingEdited, update, showAddWhiteboard, addWhiteboard, setWhiteBoard } from '../actions';
@@ -8,37 +10,43 @@ import AddWhiteBoardForm from './whiteboard/addWhiteboardForm';
 import WhiteBoard from './whiteboard/whiteboard';
 import { customStyles } from './component-styles/styles';
 
+
 const WhiteboardContainer = props => (
-  <div>
-    <StartPage
-      handleAddWhiteboard={props.handleAddWhiteboard}
-      showWhiteBoard={props.showWhiteBoard}
-      whiteboards={props.whiteboards}
-      handleSetWhiteBoard={props.handleSetWhiteBoard}
-    />
-    <Modal isOpen={props.showAddWhiteBoard} style={customStyles}>
-      <AddWhiteBoardForm
-        isVisible={props.showAddWhiteBoard}
-        handleSaveWhiteBoard={props.handleSaveWhiteBoard}
+  <Router history={browserHistory} >
+    <Route path="/(:filter)" component={StartPage}>
+      <Route path="/:name" component={WhiteBoard} />
+    </Route>
+    <div>
+      <StartPage
+        handleAddWhiteboard={props.handleAddWhiteboard}
+        showWhiteBoard={props.showWhiteBoard}
+        whiteboards={props.whiteboards}
+        handleSetWhiteBoard={props.handleSetWhiteBoard}
       />
-    </Modal>
-    <WhiteBoard
-      currentWhiteboard={props.currentWhiteboard}
-      showWhiteBoard={props.showWhiteBoard}
-      handleAdd={props.handleAdd}
-      postits={props.postits}
-      confirmIsVisible={props.confirmIsVisible}
-      handleEdit={props.handleEdit}
-      beingDeleted={props.beingDeleted}
-      handleDeletePostIt={props.handleDeletePostIt}
-      showEdit={props.showEdit}
-      editing={props.editing}
-      handleUpdatePostIt={props.handleUpdatePostIt}
-      handleUpdateClick={props.handleUpdateClick}
-      closeEditDialog={props.closeEditDialog}
-      handleDeleteClick={props.handleDeleteClick}
-    />
-  </div>
+      <Modal isOpen={props.showAddWhiteBoard} style={customStyles}>
+        <AddWhiteBoardForm
+          isVisible={props.showAddWhiteBoard}
+          handleSaveWhiteBoard={props.handleSaveWhiteBoard}
+        />
+      </Modal>
+      <WhiteBoard
+        currentWhiteboard={props.currentWhiteboard}
+        showWhiteBoard={props.showWhiteBoard}
+        handleAdd={props.handleAdd}
+        postits={props.postits}
+        confirmIsVisible={props.confirmIsVisible}
+        handleEdit={props.handleEdit}
+        beingDeleted={props.beingDeleted}
+        handleDeletePostIt={props.handleDeletePostIt}
+        showEdit={props.showEdit}
+        editing={props.editing}
+        handleUpdatePostIt={props.handleUpdatePostIt}
+        handleUpdateClick={props.handleUpdateClick}
+        closeEditDialog={props.closeEditDialog}
+        handleDeleteClick={props.handleDeleteClick}
+      />
+    </div>
+  </Router>
 );
 
 const mapStateToProps = state => ({
