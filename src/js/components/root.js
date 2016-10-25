@@ -10,7 +10,7 @@ const Root = ({ store }) => (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/(:filter)" component={WhiteboardContainer} >
-        // <Route path="/:name" component={Whiteboard} />
+        <Route path="/:name" component={Whiteboard} />
       </Route>
     </Router>
   </Provider>
