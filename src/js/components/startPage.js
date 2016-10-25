@@ -20,7 +20,7 @@ const StartPage = (props) => {
   if (!props.showWhiteBoard) {
     return (
       <div>
-        <TitleBar data={'FLOGGIT WHITEBOARDS'} />
+        <TitleBar data={'FLOGGIT'} />
         <AddWhiteBoardButton handleAddWhiteboard={props.handleAddWhiteboard} />
         <ul className="list-group">
           {props.whiteboards.map(item => (

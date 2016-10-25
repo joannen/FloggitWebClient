@@ -1,31 +1,31 @@
 import React from 'react';
-import Modal from 'react-modal';
-
 import { connect } from 'react-redux';
+
 import { add, remove, setBeingDeleted, showDelete, showEdit,
         setBeingEdited, update, showAddWhiteboard, addWhiteboard, setWhiteBoard } from '../actions';
-import StartPage from './startPage';
-import AddWhiteBoardForm from './whiteboard/addWhiteboardForm';
-import { customStyles } from './component-styles/styles';
+import WhiteBoard from './whiteboard/whiteboard';
 
-
-const WhiteboardContainer = props => (
-  <div>
-    <StartPage
-      handleAddWhiteboard={props.handleAddWhiteboard}
+const PostitContainer = (props) =>
+  (
+    <WhiteBoard
+      currentWhiteboard={props.currentWhiteboard}
       showWhiteBoard={props.showWhiteBoard}
-      whiteboards={props.whiteboards}
-      handleSetWhiteBoard={props.handleSetWhiteBoard}
+      handleAdd={props.handleAdd}
+      postits={props.postits}
+      confirmIsVisible={props.confirmIsVisible}
+      handleEdit={props.handleEdit}
+      beingDeleted={props.beingDeleted}
+      handleDeletePostIt={props.handleDeletePostIt}
+      showEdit={props.showEdit}
+      editing={props.editing}
+      handleUpdatePostIt={props.handleUpdatePostIt}
+      handleUpdateClick={props.handleUpdateClick}
+      closeEditDialog={props.closeEditDialog}
+      handleDeleteClick={props.handleDeleteClick}
     />
-    <Modal isOpen={props.showAddWhiteBoard} style={customStyles}>
-      <AddWhiteBoardForm
-        isVisible={props.showAddWhiteBoard}
-        handleSaveWhiteBoard={props.handleSaveWhiteBoard}
-      />
-    </Modal>
 
-  </div>
-);
+  );
+};
 
 const mapStateToProps = state => ({
   postits: state.currentWhiteboard.postIts,
@@ -39,6 +39,7 @@ const mapStateToProps = state => ({
   showWhiteBoard: state.currentWhiteboard.showWhiteBoard,
   currentWhiteboard: state.currentWhiteboard.whiteboard
 });
+
 
 const mapDispatchToProps = dispatch => ({
   handleAddWhiteboard: () => {
@@ -95,25 +96,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-WhiteboardContainer.propTypes = {
-  postits: React.PropTypes.arrayOf(React.PropTypes.shape),
-  confirmIsVisible: React.PropTypes.bool,
-  beingDeleted: React.PropTypes.number,
-  showEdit: React.PropTypes.bool,
-  editing: React.PropTypes.shape,
-  showAddWhiteBoard: React.PropTypes.bool,
-  whiteboards: React.PropTypes.arrayOf(React.PropTypes.shape),
-  showWhiteBoard: React.PropTypes.bool,
-  currentWhiteboard: React.PropTypes.shape,
-  handleAddWhiteboard: React.PropTypes.func,
-  handleSaveWhiteBoard: React.PropTypes.func,
-  handleSetWhiteBoard: React.PropTypes.func,
-  handleAdd: React.PropTypes.func,
-  handleDeleteClick: React.PropTypes.func,
-  handleDeletePostIt: React.PropTypes.func,
-  handleEdit: React.PropTypes.func,
-  handleUpdateClick: React.PropTypes.func,
-  handleUpdatePostIt: React.PropTypes.func,
-  closeEditDialog: React.PropTypes.func
-};
-export default connect(mapStateToProps, mapDispatchToProps)(WhiteboardContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PostitContainer);
