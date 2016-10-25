@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router';
+
 import TitleBar from './titlebar';
 import WhiteBoardButton from './whiteboard/whiteBoardButton';
 
@@ -20,19 +22,38 @@ const StartPage = (props) => {
       <div>
         <TitleBar data={'FLOGGIT WHITEBOARDS'} />
         <AddWhiteBoardButton handleAddWhiteboard={props.handleAddWhiteboard} />
-        <div className="post-its-container">
-          <ul className="list-group">
-            {props.whiteboards.map(item => (
+        <ul className="list-group">
+          {props.whiteboards.map(item => (
+            <Link to={item.whiteboard.name}>
               <WhiteBoardButton
                 key={item.id}
                 data={item}
                 handleSetWhiteBoard={props.handleSetWhiteBoard}
               />
-            ))}
-          </ul>
-        </div>
-
+            </Link>
+              ))}
+        </ul>
       </div>
+      // <div>
+      //   <TitleBar data={'FLOGGIT WHITEBOARDS'} />
+      //   <AddWhiteBoardButton handleAddWhiteboard={props.handleAddWhiteboard} />
+      //   <div className="post-its-container">
+          // <ul className="list-group">
+          //   {props.whiteboards.map(item => (
+          //     <WhiteBoardButton
+          //       key={item.id}
+          //       data={item}
+          //       handleSetWhiteBoard={props.handleSetWhiteBoard}
+          //     />
+          //   ))}
+          // </ul>
+      //     <ul>
+      //       {props.whiteboards.map(item => (
+      //         <Link to="whiteboard">{item.whiteboard.name} </Link>
+      //       ))}
+      //     </ul>
+      //   </div>
+      // </div>
 );
   }
   return null;
@@ -40,7 +61,9 @@ const StartPage = (props) => {
 
 StartPage.propTypes = {
   showWhiteBoard: React.PropTypes.bool,
-  handleAddWhiteboard: React.PropTypes.func
+  handleAddWhiteboard: React.PropTypes.func,
+  whiteboards: React.PropTypes.arrayOf(React.PropTypes.shape),
+  handleSetWhiteBoard: React.PropTypes.func
 };
 
 export default StartPage;

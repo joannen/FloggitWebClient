@@ -1,20 +1,13 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import { add, getAll, remove, setBeingDeleted, showDelete, showEdit,
-        setBeingEdited, update, showAddWhiteboard, addWhiteboard, setWhiteBoard, showWhiteBoard } from '../actions';
+import { add, remove, setBeingDeleted, showDelete, showEdit,
+        setBeingEdited, update, showAddWhiteboard, addWhiteboard, setWhiteBoard } from '../actions';
 import StartPage from './startPage';
 import AddWhiteBoardForm from './whiteboard/addWhiteboardForm';
 import WhiteBoard from './whiteboard/whiteboard';
+import { customStyles } from './component-styles/styles';
 
-const customStyles = {
-  content: {
-    position: 'fixed',
-    display: 'flex',
-    flexWrap: 'wrap',
-    width: '50%'
-  }
-};
 const WhiteboardContainer = props => (
   <div>
     <StartPage
@@ -67,14 +60,11 @@ const mapDispatchToProps = dispatch => ({
   },
   handleSaveWhiteBoard: (name) => {
     const wb = { name, postIts: [] };
-    console.log(name);
     dispatch(addWhiteboard(wb));
     dispatch(showAddWhiteboard(false));
   },
   handleSetWhiteBoard: (data) => {
-    console.log(data);
     dispatch(setWhiteBoard(data));
-    // dispatch(showWhiteBoard(true));
   },
   handleAdd: (postit) => {
     const whiteboardId = postit.whiteboard;
@@ -93,7 +83,6 @@ const mapDispatchToProps = dispatch => ({
       dispatch(setBeingDeleted(0));
       dispatch(showDelete(false));
     }
-    // dispatch(getAll());
   },
   handleEdit: (postit) => {
     dispatch(showEdit(true));
@@ -118,6 +107,27 @@ const mapDispatchToProps = dispatch => ({
   closeEditDialog: () => {
     dispatch(showEdit(false));
   }
-
 });
+
+WhiteboardContainer.propTypes = {
+  postits: React.PropTypes.arrayOf(React.PropTypes.shape),
+  confirmIsVisible: React.PropTypes.bool,
+  beingDeleted: React.PropTypes.number,
+  showEdit: React.PropTypes.bool,
+  editing: React.PropTypes.shape,
+  showAddWhiteBoard: React.PropTypes.bool,
+  whiteboards: React.PropTypes.arrayOf(React.PropTypes.shape),
+  showWhiteBoard: React.PropTypes.bool,
+  currentWhiteboard: React.PropTypes.shape,
+  handleAddWhiteboard: React.PropTypes.func,
+  handleSaveWhiteBoard: React.PropTypes.func,
+  handleSetWhiteBoard: React.PropTypes.func,
+  handleAdd: React.PropTypes.func,
+  handleDeleteClick: React.PropTypes.func,
+  handleDeletePostIt: React.PropTypes.func,
+  handleEdit: React.PropTypes.func,
+  handleUpdateClick: React.PropTypes.func,
+  handleUpdatePostIt: React.PropTypes.func,
+  closeEditDialog: React.PropTypes.func
+};
 export default connect(mapStateToProps, mapDispatchToProps)(WhiteboardContainer);

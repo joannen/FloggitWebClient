@@ -1,15 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
 import AddPostItForm from './addPostItForm';
+import { customStyles } from '../component-styles/styles';
 
-const customStyles = {
-  content: {
-    position: 'fixed',
-    display: 'flex',
-    flexWrap: 'wrap',
-    width: '50%'
-  }
-};
 class AddPostItButton extends React.Component {
 
   constructor() {
@@ -67,9 +60,9 @@ class AddPostItButton extends React.Component {
   }
 }
 
-// AddPostItButton.propTypes = {
-//   onAddPostIt: React.PropTypes.func,
-//   currentWhiteboard: React.PropTypes.shape
-// };
+AddPostItButton.propTypes = {
+  onAddPostIt: React.PropTypes.func,
+  currentWhiteboard: React.PropTypes.shape
+};
 
 export default AddPostItButton;

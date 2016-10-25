@@ -2,7 +2,6 @@ import React from 'react';
 
 const ConfirmDeletePostIt = (props) => {
   function handleOk() {
-    console.log(`DELETING ${props.id}`);
     props.onDelete(props.currentWhiteboard.id, props.id);
   }
 

@@ -6,7 +6,6 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.ADD_WHITEBOARD:
       {
-        console.log(action.data);
         const whiteboard = Object.assign({}, action.data);
         return [...state, whiteboard];
       }

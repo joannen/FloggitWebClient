@@ -70,8 +70,12 @@ class AddPostItForm extends React.Component {
     const postText = this.text.value.trim();
     const postColor = this.setColor();
     const whiteboard = this.props.currentWhiteboard.id;
-    const postIt = { title: postTitle, text: postText, color: postColor, whiteboard, notes: this.state.notes };
-
+    const postIt = {
+      title: postTitle,
+      text: postText,
+      color: postColor,
+      whiteboard,
+      notes: this.state.notes };
     this.props.onAddPostIt(postIt);
   }
 
@@ -182,10 +186,10 @@ class AddPostItForm extends React.Component {
   }
 }
 
-// AddPostItForm.propTypes = {
-//   closeModal: React.PropTypes.func,
-//   onAddPostIt: React.PropTypes.func,
-//   currentWhiteboard: React.PropTypes.shape
-// };
+AddPostItForm.propTypes = {
+  closeModal: React.PropTypes.func,
+  onAddPostIt: React.PropTypes.func,
+  currentWhiteboard: React.PropTypes.shape
+};
 
 export default AddPostItForm;

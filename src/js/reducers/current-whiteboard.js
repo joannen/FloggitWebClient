@@ -25,7 +25,8 @@ const reducer = (state = initialState, action) => {
     }
     case types.REMOVE_POSTIT: {
       const id = action.data;
-      return Object.assign({}, state, { postIts: state.postIts.filter(postit => postit.id !== id) });
+      return Object.assign({}, state, { postIts: state.postIts
+                                        .filter(postit => postit.id !== id) });
     }
 
 

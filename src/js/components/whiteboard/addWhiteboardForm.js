@@ -39,9 +39,7 @@ const AddWhiteBoardForm = (props) => {
 };
 
 AddWhiteBoardForm.propTypes = {
-  isVisible: React.PropTypes.bool,
-  handleSaveWhiteBoard: React.PropTypes.func
-
+  isVisible: React.PropTypes.bool
 };
 
 

@@ -2,7 +2,6 @@ import React from 'react';
 
 const WhiteBoardButton = (props) => {
   function handleClick() {
-    console.log(props.data);
     props.handleSetWhiteBoard(props.data);
   }
   return (
@@ -14,8 +13,8 @@ const WhiteBoardButton = (props) => {
 );
 };
 
-// WhiteBoardButton.propTypes = {
-//   data: React.PropTypes.shape,
-//   handleSetWhiteBoard: React.PropTypes.func
-// };
+WhiteBoardButton.propTypes = {
+  data: React.PropTypes.shape,
+  handleSetWhiteBoard: React.PropTypes.func
+};
 export default WhiteBoardButton;

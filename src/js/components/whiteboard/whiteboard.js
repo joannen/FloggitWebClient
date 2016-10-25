@@ -4,26 +4,7 @@ import WhiteboardHeader from './whiteboardHeader';
 import ConfirmDeletePostIt from '../postit/confirmDeleteDialog';
 import PostIt from '../postit/postit';
 import EditDialogue from '../postit/editDialogue';
-
-const confirmDialogStyles = {
-  content: {
-    top: '40%',
-    left: '20%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
-
-const editDialogStyles = {
-  content: {
-    position: 'fixed',
-    display: 'flex',
-    flexWrap: 'wrap',
-    width: '50%'
-  }
-};
+import { confirmDialogStyles, editDialogStyles } from '../component-styles/styles';
 
 const WhiteBoard = (props) => {
   if (props.showWhiteBoard) {
@@ -60,30 +41,25 @@ const WhiteBoard = (props) => {
           onExit={props.closeEditDialog}
         />
       </Modal>
-
-
     </div>
 ); }
   return null;
 };
 
 WhiteBoard.propTypes = {
-//   handleAdd: React.PropTypes.func,
-  postits: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.number,
-    postIt: React.PropTypes.shape
-  })),
-  currentWhiteboard: React.PropTypes.shape
-//   confirmIsVisible: React.PropTypes.bool,
-//   handleEdit: React.PropTypes.func,
-//   beingDeleted: React.PropTypes.bool,
-//   handleDeletePostIt: React.PropTypes.func,
-//   showEdit: React.PropTypes.bool,
-//   editing: React.PropTypes.shape,
-//   handleUpdatePostIt: React.PropTypes.func,
-//   handleUpdateClick: React.PropTypes.func,
-//   closeEditDialog: React.PropTypes.func,
-//   handleDeleteClick: React.PropTypes.func
+  showWhiteBoard: React.PropTypes.bool,
+  handleAdd: React.PropTypes.func,
+  postits: React.PropTypes.arrayOf(React.PropTypes.shape()),
+  currentWhiteboard: React.PropTypes.shape,
+  confirmIsVisible: React.PropTypes.bool,
+  handleEdit: React.PropTypes.func,
+  beingDeleted: React.PropTypes.bool,
+  handleDeletePostIt: React.PropTypes.func,
+  showEdit: React.PropTypes.bool,
+  editing: React.PropTypes.shape,
+  handleUpdatePostIt: React.PropTypes.func,
+  handleUpdateClick: React.PropTypes.func,
+  closeEditDialog: React.PropTypes.func
 };
 
 export default WhiteBoard;
