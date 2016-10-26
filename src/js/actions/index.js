@@ -53,7 +53,7 @@ export const remove = (whiteboardId, id) => (dispatch) => {
   axios.delete(`http://localhost:8080/api/v1/whiteboards/${whiteboardId}/postits/${id}`)
         .then((response) => {
           dispatch(internalRemove(id));
-          // dispatch(getAllPostits(whiteboardId));
+          dispatch(getAllPostits(whiteboardId));
         }).catch((error) => {
           dispatch(internalError('Could not remove postit'));
         });
@@ -73,7 +73,7 @@ export const remove = (whiteboardId, id) => (dispatch) => {
 export const update = (id, postit) => (dispatch) => {
   axios.put(`http://localhost:8080/api/v1/postits/${id}`, postit)
         .then((response) => {
-          // dispatch(getAll());
+          dispatch(getAllPostits());
         });
 };
 

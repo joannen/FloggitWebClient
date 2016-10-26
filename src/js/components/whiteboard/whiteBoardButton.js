@@ -2,7 +2,7 @@ import React from 'react';
 
 const WhiteBoardButton = (props) => {
   function handleClick() {
-    props.handleSetWhiteBoard(props.data);
+    // props.handleSetWhiteBoard(props.data);
   }
   return (
     <li className="post-it">

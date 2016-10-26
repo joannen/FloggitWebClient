@@ -9,6 +9,6 @@ const WhiteboardHeader = props => (
   </div>);
 WhiteboardHeader.propTypes = {
   onAddPostIt: React.PropTypes.func,
-  currentWhiteboard: React.PropTypes.currentWhiteboard
+  currentWhiteboard: React.PropTypes.shape
 };
 export default WhiteboardHeader;

@@ -7,8 +7,9 @@ import EditDialogue from '../postit/editDialogue';
 import { confirmDialogStyles, editDialogStyles } from '../component-styles/styles';
 
 const WhiteBoard = (props) => {
-  if (props.showWhiteBoard) {
-    return (< div >
+  console.log(props.currentWhiteboard);
+  return (
+    < div >
       <WhiteboardHeader onAddPostIt={props.handleAdd} currentWhiteboard={props.currentWhiteboard} />
       <div className="post-its-container">
         <ul className="list-group">
@@ -42,24 +43,23 @@ const WhiteBoard = (props) => {
         />
       </Modal>
     </div>
-); }
-  return null;
+);
 };
 
 WhiteBoard.propTypes = {
-  showWhiteBoard: React.PropTypes.bool,
   handleAdd: React.PropTypes.func,
   postits: React.PropTypes.arrayOf(React.PropTypes.shape()),
   currentWhiteboard: React.PropTypes.shape,
   confirmIsVisible: React.PropTypes.bool,
   handleEdit: React.PropTypes.func,
-  beingDeleted: React.PropTypes.bool,
+  beingDeleted: React.PropTypes.shape,
   handleDeletePostIt: React.PropTypes.func,
   showEdit: React.PropTypes.bool,
   editing: React.PropTypes.shape,
   handleUpdatePostIt: React.PropTypes.func,
   handleUpdateClick: React.PropTypes.func,
-  closeEditDialog: React.PropTypes.func
+  closeEditDialog: React.PropTypes.func,
+  whiteboards: React.PropTypes.arrayOf(React.PropTypes.shape())
 };
 
 export default WhiteBoard;
