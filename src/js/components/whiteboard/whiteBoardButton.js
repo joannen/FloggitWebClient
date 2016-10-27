@@ -14,7 +14,7 @@ const WhiteBoardButton = (props) => {
 };
 
 WhiteBoardButton.propTypes = {
-  data: React.PropTypes.shape,
-  handleSetWhiteBoard: React.PropTypes.func
+  data: React.PropTypes.shape
+  // handleSetWhiteBoard: React.PropTypes.func
 };
 export default WhiteBoardButton;

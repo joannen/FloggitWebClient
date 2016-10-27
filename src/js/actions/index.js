@@ -65,8 +65,14 @@ export const remove = (whiteboardId, id) => (dispatch) => {
 //
 //   socket.on('whiteboard-update', (data) => {
 //     console.log('update', data);
-//     const postits = data;
-//     dispatch(internalUpdatePostits(postits));
+//     if (data.hasOwnProperty('postIts')) {
+//       console.log('UPDATING whiteboards');
+//       dispatch(internalUpdateWhiteboards(data));
+//     } else {
+//       console.log('UPDATING whiteboards');
+//
+//       dispatch(internalUpdatePostits(data));
+//     }
 //   });
 // };
 
@@ -121,7 +127,7 @@ export const addWhiteboard = whiteboard => (dispatch) => {
 
           };
           dispatch(internalAddWhiteboard(wb));
-          dispatch(getAllPostits());
+          // dispatch(getAllPostits());
         });
 };
 

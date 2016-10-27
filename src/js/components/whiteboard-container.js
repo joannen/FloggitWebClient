@@ -46,8 +46,8 @@ const mapDispatchToProps = dispatch => ({
   },
   handleSaveWhiteBoard: (name) => {
     const wb = { name, postIts: [] };
-    dispatch(addWhiteboard(wb));
     dispatch(showAddWhiteboard(false));
+    dispatch(addWhiteboard(wb));
   },
   handleSetWhiteBoard: (data) => {
     dispatch(setWhiteBoard(data));
@@ -96,24 +96,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 WhiteboardContainer.propTypes = {
-  postits: React.PropTypes.arrayOf(React.PropTypes.shape),
-  confirmIsVisible: React.PropTypes.bool,
-  beingDeleted: React.PropTypes.number,
-  showEdit: React.PropTypes.bool,
-  editing: React.PropTypes.shape,
   showAddWhiteBoard: React.PropTypes.bool,
   whiteboards: React.PropTypes.arrayOf(React.PropTypes.shape),
   showWhiteBoard: React.PropTypes.bool,
-  currentWhiteboard: React.PropTypes.shape,
   handleAddWhiteboard: React.PropTypes.func,
   handleSaveWhiteBoard: React.PropTypes.func,
-  handleSetWhiteBoard: React.PropTypes.func,
-  handleAdd: React.PropTypes.func,
-  handleDeleteClick: React.PropTypes.func,
-  handleDeletePostIt: React.PropTypes.func,
-  handleEdit: React.PropTypes.func,
-  handleUpdateClick: React.PropTypes.func,
-  handleUpdatePostIt: React.PropTypes.func,
-  closeEditDialog: React.PropTypes.func
+  handleSetWhiteBoard: React.PropTypes.func
 };
 export default connect(mapStateToProps, mapDispatchToProps)(WhiteboardContainer);

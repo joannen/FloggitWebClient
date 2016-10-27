@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import { getAll, startSocket, getAllWhiteboards } from '../actions';
+import { getAllWhiteboards } from '../actions';
 
 import reducer from '../reducers';
 

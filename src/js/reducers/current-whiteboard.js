@@ -17,6 +17,7 @@ const reducer = (state = initialState, action) => {
                                         postIts: action.data.whiteboard.postIts });
     }
     case types.ADD_POSTIT: {
+      console.log('adding postit');
       const postit = Object.assign({}, action.data);
       return Object.assign({}, state, { postIts: [...state.postIts, postit] });
     }
@@ -28,7 +29,6 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, { postIts: state.postIts
                                         .filter(postit => postit.id !== id) });
     }
-
 
     default: {
       return state;

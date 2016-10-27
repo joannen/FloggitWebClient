@@ -2,32 +2,36 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { add, remove, setBeingDeleted, showDelete, showEdit,
-        setBeingEdited, update, showAddWhiteboard, addWhiteboard, setWhiteBoard } from '../actions';
+        setBeingEdited, update, showAddWhiteboard, addWhiteboard, setWhiteBoard, refreshWhiteboards } from '../actions';
 import WhiteBoard from './whiteboard/whiteboard';
 
 const PostitContainer = (props) => {
-  console.log(props);
-  const selected = props.whiteboards.filter(item => item.whiteboard.name === props.params.name)[0];
-  const currentWhiteboard = (selected !== null) ? selected : null;
-  const postits = (currentWhiteboard !== null) ? currentWhiteboard.whiteboard.postIts : [];
-  return (
-    <WhiteBoard
-      currentWhiteboard={currentWhiteboard}
+  console.log(`props.whiteboards.length: ${props.whiteboards.length}`);
+  const selected = props.whiteboards.filter(item => item.whiteboard.name === props.params.name);
+  const currentWhiteboard = (selected.length > 0) ? selected[0] : null;
+  // const postits = (currentWhiteboard !== null) ? currentWhiteboard.whiteboard.postIts : [];
+  if (props.currentWhiteboard) {
+    return (
+      <WhiteBoard
+        currentWhiteboard={currentWhiteboard}
       // currentWhiteboard={props.handleSetWhiteBoard}
-      handleAdd={props.handleAdd}
-      postits={postits}
-      confirmIsVisible={props.confirmIsVisible}
-      handleEdit={props.handleEdit}
-      beingDeleted={props.beingDeleted}
-      handleDeletePostIt={props.handleDeletePostIt}
-      showEdit={props.showEdit}
-      editing={props.editing}
-      handleUpdatePostIt={props.handleUpdatePostIt}
-      handleUpdateClick={props.handleUpdateClick}
-      closeEditDialog={props.closeEditDialog}
-      handleDeleteClick={props.handleDeleteClick}
-    />
-  );
+        handleAdd={props.handleAdd}
+        postits={props.postits}
+        confirmIsVisible={props.confirmIsVisible}
+        handleEdit={props.handleEdit}
+        beingDeleted={props.beingDeleted}
+        handleDeletePostIt={props.handleDeletePostIt}
+        showEdit={props.showEdit}
+        editing={props.editing}
+        handleUpdatePostIt={props.handleUpdatePostIt}
+        handleUpdateClick={props.handleUpdateClick}
+        closeEditDialog={props.closeEditDialog}
+        handleDeleteClick={props.handleDeleteClick}
+        whiteboards={props.whiteboards}
+        name={props.params.name}
+      />
+  ); }
+  return <h1>not found</h1>;
 };
 
 const mapStateToProps = state => ({
@@ -43,7 +47,6 @@ const mapStateToProps = state => ({
   currentWhiteboard: state.currentWhiteboard.whiteboard
 });
 
-
 const mapDispatchToProps = dispatch => ({
   handleAddWhiteboard: () => {
     dispatch(showAddWhiteboard(true));
@@ -56,12 +59,8 @@ const mapDispatchToProps = dispatch => ({
   handleSetWhiteBoard: (data) => {
     dispatch(setWhiteBoard(data));
   },
-  // handleSetWhiteBoard: (name) => {
-  //   const wb = props.whiteboards.filter(item => item.whiteboard.name === name)[0];
-  // },
   handleAdd: (postit) => {
     const whiteboardId = postit.whiteboard;
-    console.log(`WHITEBOARDID: ${whiteboardId}`);
     dispatch(add(postit, whiteboardId));
   },
   handleDeleteClick: (id) => {
@@ -100,6 +99,9 @@ const mapDispatchToProps = dispatch => ({
   },
   closeEditDialog: () => {
     dispatch(showEdit(false));
+  },
+  refreshWhiteboards: () => {
+    dispatch(refreshWhiteboards());
   }
 });
 
@@ -117,7 +119,7 @@ PostitContainer.propTypes = {
   handleUpdateClick: React.PropTypes.func,
   closeEditDialog: React.PropTypes.func,
   handleDeleteClick: React.PropTypes.func,
-  whiteboards: React.PropTypes.shape
+  whiteboards: React.PropTypes.arrayOf(React.PropTypes.shape)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostitContainer);
