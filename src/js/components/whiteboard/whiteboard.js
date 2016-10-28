@@ -7,10 +7,9 @@ import EditDialogue from '../postit/editDialogue';
 import { confirmDialogStyles, editDialogStyles } from '../component-styles/styles';
 
 const WhiteBoard = (props) => {
-  console.log(`props postits.length in WhiteBoard: ${props.postits.length}`);
-  if (!props.currentWhiteboard) {
-    return <h1>not found</h1>;
-  }
+  // if (!props.postits) {
+  //   return <h1>not found</h1>;
+  // }
   return (
     < div >
       <WhiteboardHeader onAddPostIt={props.handleAdd} currentWhiteboard={props.currentWhiteboard} />
@@ -61,9 +60,7 @@ WhiteBoard.propTypes = {
   editing: React.PropTypes.shape,
   handleUpdatePostIt: React.PropTypes.func,
   handleUpdateClick: React.PropTypes.func,
-  closeEditDialog: React.PropTypes.func,
-  whiteboards: React.PropTypes.arrayOf(React.PropTypes.shape()),
-  handleRefresh: React.PropTypes.func
+  closeEditDialog: React.PropTypes.func
 };
 
 export default WhiteBoard;

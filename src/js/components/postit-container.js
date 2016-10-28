@@ -6,17 +6,16 @@ import { add, remove, setBeingDeleted, showDelete, showEdit,
 import WhiteBoard from './whiteboard/whiteboard';
 
 const PostitContainer = (props) => {
-  console.log(`props.whiteboards.length: ${props.whiteboards.length}`);
   const selected = props.whiteboards.filter(item => item.whiteboard.name === props.params.name);
   const currentWhiteboard = (selected.length > 0) ? selected[0] : null;
+  window.selected = selected;
   // const postits = (currentWhiteboard !== null) ? currentWhiteboard.whiteboard.postIts : [];
-  if (props.currentWhiteboard) {
+  if (currentWhiteboard) {
     return (
       <WhiteBoard
         currentWhiteboard={currentWhiteboard}
-      // currentWhiteboard={props.handleSetWhiteBoard}
         handleAdd={props.handleAdd}
-        postits={props.postits}
+        postits={selected[0].whiteboard.postIts}
         confirmIsVisible={props.confirmIsVisible}
         handleEdit={props.handleEdit}
         beingDeleted={props.beingDeleted}
@@ -31,7 +30,7 @@ const PostitContainer = (props) => {
         name={props.params.name}
       />
   ); }
-  return <h1>not found</h1>;
+  return <h1>Not found</h1>;
 };
 
 const mapStateToProps = state => ({
